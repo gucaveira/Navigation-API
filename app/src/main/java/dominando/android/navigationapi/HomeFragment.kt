@@ -14,9 +14,7 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ) = FragmentHomeBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
@@ -24,15 +22,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //essa forma é melhor usado para quando o navigation está dentro do click de botao
-        binding.btnGo.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_completeFragment)
-        )
+        // binding.btnGo.setOnClickListener(
+        //     Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_completeFragment)
+        //   )
 
-        // forma mais generica
-        /*binding.btnGo.setOnClickListener {
+        binding.btnGo.setOnClickListener {
+            val args = Bundle().apply {
+                putString("full_name", "Nelson Glauber")
+                putInt("age", 34)
+            }
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(R.id.action_homeFragment_to_completeFragment)
-        }*/
+                .navigate(R.id.action_homeFragment_to_completeFragment, args)
+        }
     }
 
     override fun onDestroy() {
